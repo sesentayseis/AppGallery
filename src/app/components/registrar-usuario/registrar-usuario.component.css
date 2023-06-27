@@ -21,3 +21,11 @@
     background-color: #ffff;
     border-radius: 5%;
 }
+
+.form-floating{
+    text-align: start;
+}
+
+.errorLabel {
+    margin-left: 5px;
+}
