@@ -37,10 +37,16 @@ export class LoginComponent {
 
     this.loading = true;
     this.afAuth.signInWithEmailAndPassword (email,password).then((user) => {
-     
-      console.log(user)
       this.loading = false;
-      this.router.navigate(['/dashboard']);
+
+      console.log(user)
+      if(user.user?.emailVerified){
+        this.router.navigate(['/dashboard']);
+      } else{
+        this.router.navigate(['/verificar-correo']);
+      }
+      
+      
     }).catch((error) => {
       this.loading = false; 
       this.toastr.error(this.firebaseError.codeError(error.code), 'Error');    
