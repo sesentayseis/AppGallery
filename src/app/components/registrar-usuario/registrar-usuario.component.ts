@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -17,7 +18,10 @@ export class RegistrarUsuarioComponent  implements OnInit {
       private fb: FormBuilder,
       private afAuth: AngularFireAuth , 
       private toastr: ToastrService,
-      private router: Router){
+      private router: Router,
+      private firebaseError: FirebaseCodeErrorService
+      
+      ){
     this.registrarUsuario = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -33,7 +37,6 @@ export class RegistrarUsuarioComponent  implements OnInit {
     const email = this.registrarUsuario.value.email;
     const password = this.registrarUsuario.value.password;
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
-    
     if (password !== repetirPassword){
       this.toastr.error('Las contraseñas ingresadas deben ser las mismas', 'Error')
       return;
@@ -48,22 +51,11 @@ export class RegistrarUsuarioComponent  implements OnInit {
     }).catch((error) => {
       this.loading = false;
       console.log(error);
-      this.toastr.error(this.firebaseError(error.code), 'Error');
+      this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
     })
 
   }
 
-  firebaseError(code: string) {
-    switch(code){
-      case 'auth/email-already-in-use':
-        return 'El usuario ya existe';
-      case 'auth/weak-password':
-        return 'La contraseña es muy debil';
-      case 'auth/invalid-email':
-        return 'Correo invalido';
-      default:
-        return 'Error desconocido';
-    }
-  }
+ 
 
 }
