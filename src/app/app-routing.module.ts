@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'check-mail', component: VerificarCorreoComponent },
   { path: 'recover-password', component: RecuperarPasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'verificar-correo', component: VerificarCorreoComponent },
   { path: '**' , redirectTo: 'login', pathMatch: 'full' },
 ];
 

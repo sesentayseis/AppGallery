@@ -4,6 +4,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -19,7 +20,8 @@ export class RegistrarUsuarioComponent  implements OnInit {
       private afAuth: AngularFireAuth , 
       private toastr: ToastrService,
       private router: Router,
-      private firebaseError: FirebaseCodeErrorService
+      private firebaseError: FirebaseCodeErrorService,
+      private db: AngularFireDatabase
       
       ){
     this.registrarUsuario = this.fb.group({
@@ -43,11 +45,34 @@ export class RegistrarUsuarioComponent  implements OnInit {
     }
     this.loading = true;
     
-    this.afAuth.createUserWithEmailAndPassword(email, password).then(() => {
-      /*this.loading = false;
-      this.toastr.success('El usuario fue creado con exito!', 'Usuario Registrado ');
-      this.router.navigate(['/login']);*/
-      this.verificarCorreo();
+    this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+      
+      const user = userCredential.user;
+      if (user) {
+        const userId = user.uid;
+  
+        // Obtener referencia a la ubicación en la base de datos
+        const usuariosRef = this.db.list('usuarios');
+  
+        // Guardar los datos en la base de datos
+        usuariosRef.push({ email, username: email, id: userId , api: 'https://bewvyx49ag.execute-api.us-east-1.amazonaws.com/images/'+userId}).then(() => {
+          // Los datos se guardaron correctamente
+          this.toastr.success('El usuario fue creado con éxito!', 'Usuario Registrado');
+  
+      
+        }).catch((error) => {
+          // Ocurrió un error al guardar los datos
+          console.log(error);
+          this.toastr.error('Error al guardar los datos en la base de datos', 'Error');
+        });
+  
+        this.verificarCorreo();
+      } else {
+        this.loading = false;
+        console.log('No se pudo obtener el objeto de usuario');
+        this.toastr.error('Error al crear el usuario', 'Error');
+      }
+      
       
     }).catch((error) => {
       this.loading = false;
@@ -64,6 +89,8 @@ export class RegistrarUsuarioComponent  implements OnInit {
                     'Se envio un email de verificación', 
                     'Verificar email'
                     );
+
+
                   this.router.navigate(['/login']);
                 });
 
