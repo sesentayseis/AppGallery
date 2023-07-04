@@ -1,5 +1,7 @@
 export const environment = {
     production: false,
+    AWS_ACCESS_KEY: "",
+    AWS_SECRET_KEY: "",
     firebaseConfig : {
         apiKey: "AIzaSyBgGqZyl745VCVe1-4o3qbO_KhV6xrl_ZM",
         authDomain: "appgallery-3186a.firebaseapp.com",

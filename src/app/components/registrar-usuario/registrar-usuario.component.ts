@@ -25,6 +25,7 @@ export class RegistrarUsuarioComponent  implements OnInit {
       
       ){
     this.registrarUsuario = this.fb.group({
+      username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
       repetirPassword: ['', Validators.required],
@@ -36,6 +37,7 @@ export class RegistrarUsuarioComponent  implements OnInit {
   }
 
   registrar(){
+    const username = this.registrarUsuario.value.username;
     const email = this.registrarUsuario.value.email;
     const password = this.registrarUsuario.value.password;
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
@@ -55,7 +57,7 @@ export class RegistrarUsuarioComponent  implements OnInit {
         const usuariosRef = this.db.list('usuarios');
   
         // Guardar los datos en la base de datos
-        usuariosRef.push({ email, username: email, id: userId , api: 'https://bewvyx49ag.execute-api.us-east-1.amazonaws.com/images/'+userId}).then(() => {
+        usuariosRef.push({ email, username: username, id: userId , api: 'https://bewvyx49ag.execute-api.us-east-1.amazonaws.com/images/'+userId}).then(() => {
           // Los datos se guardaron correctamente
           this.toastr.success('El usuario fue creado con éxito!', 'Usuario Registrado');
   

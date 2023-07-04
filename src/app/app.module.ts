@@ -17,6 +17,8 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { HeaderComponent } from './components/header/header.component';
+import { ImagesComponent } from './components/images/images.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { environment } from 'src/environments/environment';
     RegistrarUsuarioComponent,
     VerificarCorreoComponent,
     RecuperarPasswordComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    HeaderComponent,
+    ImagesComponent,
   ],
   imports: [
     BrowserModule,
