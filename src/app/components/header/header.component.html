@@ -20,10 +20,9 @@
     <div class="icons">
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-comment-dots"></i>
-        <div class="dropdown"><i class="fa-solid fa-circle-user"></i>
+        <div class="dropdown"><i class="fa-solid fa-circle-user"></i><label class="fs-5 text-muted">{{ dataUser?.email }}</label>
             <div class="dropdown-options">
-                <a href="#">Ajustes</a>
-                <a href="/login">Cerrar sesión</a>
+                <a><button type="button" (click)="logOut()">Cerrar sesión</button></a>
               </div>
         </div>
     </div>

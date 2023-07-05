@@ -41,7 +41,7 @@ export class LoginComponent {
 
       console.log(user)
       if(user.user?.emailVerified){
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/header']);
       } else{
         this.router.navigate(['/verificar-correo']);
       }
