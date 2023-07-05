@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './components/header/header.component';
 import { ImagesComponent } from './components/images/images.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ImagesComponent } from './components/images/images.component';
     SpinnerComponent,
     HeaderComponent,
     ImagesComponent,
+    TabsComponent,
   ],
   imports: [
     BrowserModule,

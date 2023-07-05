@@ -3,9 +3,15 @@
         <i class="fa-brands fa-pinterest"></i>
     </div>
     <div class="links">
-        <a href="">INICIO</a>
+        <a >INICIO</a>
         <a href="">EXPLORAR</a>
-        <a href="">CREAR  <i class="fa-sharp fa-solid fa-angle-down"></i></a> 
+        <div class="dropdown">
+            <button>CREAR <i class="fa-sharp fa-solid fa-angle-down"></i></button>
+            <div class="dropdown-options">
+              <a href="#">Crear folder</a>
+              <a href="#">Subir imagen</a>
+            </div>
+        </div>
     </div>
     <div class="search">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -14,8 +20,13 @@
     <div class="icons">
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-comment-dots"></i>
-        <i class="fa-solid fa-circle-user"></i>
+        <div class="dropdown"><i class="fa-solid fa-circle-user"></i>
+            <div class="dropdown-options">
+                <a href="#">Ajustes</a>
+                <a href="/login">Cerrar sesión</a>
+              </div>
+        </div>
     </div>
 </div>
-<app-images></app-images>
+<app-tabs></app-tabs>
   
