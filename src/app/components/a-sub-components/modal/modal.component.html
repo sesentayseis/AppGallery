@@ -2,12 +2,19 @@
 
     <div class="card">
         <div class="card-header">
-          Featured <button (click)="closeModal()">X</button>
+          <h3>Crear carpeta</h3> <button (click)="closeModal()">X</button>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+
+            <form (ngSubmit)="createFolder()" [formGroup]="crearFolder">
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre de la Carpeta:</label>
+                <input type="text" class="form-control" formControlName="nameFolder"  />
+                
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+            
         </div>
       </div>
 
