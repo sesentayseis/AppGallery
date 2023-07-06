@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -36,11 +37,12 @@ export class RegistrarUsuarioComponent  implements OnInit {
     
   }
 
-  registrar(){
+  async registrar(){
     const username = this.registrarUsuario.value.username;
     const email = this.registrarUsuario.value.email;
     const password = this.registrarUsuario.value.password;
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
+    
     if (password !== repetirPassword){
       this.toastr.error('Las contraseñas ingresadas deben ser las mismas', 'Error')
       return;
@@ -52,15 +54,52 @@ export class RegistrarUsuarioComponent  implements OnInit {
       const user = userCredential.user;
       if (user) {
         const userId = user.uid;
-  
+        const urlAws = 'https://xw2v9yt588.execute-api.us-east-1.amazonaws.com/users'
+        const urlAwsApi = urlAws+"/"+userId
         // Obtener referencia a la ubicación en la base de datos
         const usuariosRef = this.db.list('usuarios');
   
         // Guardar los datos en la base de datos
-        usuariosRef.push({ email, username: username, id: userId , api: 'https://bewvyx49ag.execute-api.us-east-1.amazonaws.com/images/'+userId}).then(() => {
+        usuariosRef.push({ email, username: username, id: userId , api: urlAwsApi}).then(() => {
           // Los datos se guardaron correctamente
           this.toastr.success('El usuario fue creado con éxito!', 'Usuario Registrado');
-  
+
+          const usuarioData = {
+            id:userId,
+            nameUser:username,
+            carpetas: [],
+          };
+        
+          try {
+            // Enviar el objeto al endpoint de la API
+            const response = fetch(urlAws, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(usuarioData),
+            });
+          
+            response.then((res) => {
+              if (res.ok) {
+                res.json().then((result) => {
+                  console.log(result);
+                  //alert('Usuario subida exitosamente');
+                });
+              } else {
+                //alert('Error al subir la usuario');
+              }
+            }).catch((error) => {
+              console.log(error);
+             // alert('Error al enviar los datos a la API.');
+            });
+            
+          } catch (error) {
+            console.log(error);
+            //alert('Error al enviar los datos a la API');
+          }
+          
+
       
         }).catch((error) => {
           // Ocurrió un error al guardar los datos

@@ -7,7 +7,7 @@
         <input type="text" class="form-control" formControlName="username" placeholder="Nickname" />
         <label>Nombre de Usuario </label>
         <span *ngIf="registrarUsuario.get('username')?.hasError('required') && registrarUsuario.get('username')?.touched" class="text-danger errorLabel">
-          El <strong>correo</strong> es requerido
+          El <strong>nombre de usuario</strong> es requerido
         </span>
         <span *ngIf="registrarUsuario.get('username')?.hasError('username') && registrarUsuario.get('username')?.touched" class="text-danger errorLabel">
             El <strong>Nombre de Usuario</strong> es invalido
