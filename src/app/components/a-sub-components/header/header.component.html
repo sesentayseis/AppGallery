@@ -8,8 +8,8 @@
         <div class="dropdown">
             <button>CREAR <i class="fa-sharp fa-solid fa-angle-down"></i></button>
             <div class="dropdown-options">
-              <a href="#">Crear folder</a>
-              <a href="#">Subir imagen</a>
+              <button  (click)="openModal()">Crear folder</button>
+              <a href="/subir-imagen" >Subir imagen</a>
             </div>
         </div>
     </div>
@@ -26,6 +26,10 @@
               </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="modalSwitch == true">
+    <app-modal></app-modal>
 </div>
 
   

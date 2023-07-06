@@ -20,6 +20,8 @@ import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './components/a-sub-components/header/header.component';
 import { ImagesComponent } from './components/a-sub-components/images/images.component';
 import { TabsComponent } from './components/a-sub-components/tabs/tabs.component';
+import { ModalComponent }  from './components/a-sub-components/modal/modal.component';
+import { SubirImagenComponent } from './components/a-sub-components/subir-imagen/subir-imagen.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,9 @@ import { TabsComponent } from './components/a-sub-components/tabs/tabs.component
     HeaderComponent,
     ImagesComponent,
     TabsComponent,
+    ModalComponent,
+    SubirImagenComponent
+    
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { VerificarCorreoComponent } from './components/verificar-correo/verifica
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-import { ImagesComponent } from './components/a-sub-components/images/images.component';
+import { SubirImagenComponent } from './components/a-sub-components/subir-imagen/subir-imagen.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'login', pathMatch: 'full' },
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'recover-password', component: RecuperarPasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
-  
+  { path: 'subir-imagen', component: SubirImagenComponent },
   { path: '**' , redirectTo: 'login', pathMatch: 'full' },
 ];
 
