@@ -5,8 +5,8 @@ import { RegistrarUsuarioComponent } from './components/registrar-usuario/regist
 import { VerificarCorreoComponent } from './components/verificar-correo/verificar-correo.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ImagesComponent } from './components/images/images.component';
+
+import { ImagesComponent } from './components/a-sub-components/images/images.component';
 
 const routes: Routes = [
   { path: '' , redirectTo: 'login', pathMatch: 'full' },
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'recover-password', component: RecuperarPasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
-  { path: 'header', component: HeaderComponent },
+  
   { path: '**' , redirectTo: 'login', pathMatch: 'full' },
 ];
 

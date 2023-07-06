@@ -14,6 +14,7 @@ import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.s
 export class LoginComponent {
   loginUsuario: FormGroup;
   loading: boolean = false;
+  //dataUser: any;
 
   constructor( 
     private fb: FormBuilder,
@@ -29,7 +30,18 @@ export class LoginComponent {
       })
   }
 
-  ngOnInit(): void{}
+  ngOnInit(): void{
+    /*
+    this.afAuth.currentUser.then(user => {
+      if(user && user.emailVerified) {
+        this.dataUser = user;
+        console.log(user)
+      } else {
+        //this.router.navigate(['/login']);
+        console.log("error")
+      }
+    })*/
+  }
 
   login(){
     const email = this.loginUsuario.value.email;
@@ -41,7 +53,7 @@ export class LoginComponent {
 
       console.log(user)
       if(user.user?.emailVerified){
-        this.router.navigate(['/header']);
+        this.router.navigate(['/dashboard']);
       } else{
         this.router.navigate(['/verificar-correo']);
       }

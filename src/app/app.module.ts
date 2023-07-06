@@ -17,9 +17,9 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
-import { HeaderComponent } from './components/header/header.component';
-import { ImagesComponent } from './components/images/images.component';
-import { TabsComponent } from './components/tabs/tabs.component';
+import { HeaderComponent } from './components/a-sub-components/header/header.component';
+import { ImagesComponent } from './components/a-sub-components/images/images.component';
+import { TabsComponent } from './components/a-sub-components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
