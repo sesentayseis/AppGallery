@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit {
     ){
 
     this.crearFolder = this.fb.group({
-      nameFolder: ['']
+      nameFolder: ['', Validators.required]
      
     })
   }
@@ -36,7 +36,7 @@ export class ModalComponent implements OnInit {
   
   async createFolder() {
     const folderName = this.crearFolder.value.nameFolder;
-    console.log(folderName);
+    // nombre del al carpeta console.log(folderName);
   
     this.afAuth.currentUser.then(user => {
       const idfolder = user?.uid;
@@ -52,7 +52,7 @@ export class ModalComponent implements OnInit {
           imagenes: [],
         };
 
-        console.log(folderData);
+        //console.log(folderData);
         
         try {
           // Enviar el objeto al endpoint de la API
@@ -67,12 +67,15 @@ export class ModalComponent implements OnInit {
           response.then((res) => {
             if (res.ok) {
               res.json().then((result) => {
-                console.log(result);
+                //console.log(result);
+                console.log('carpeta creada con exito');
                 //alert('carpeta creada con exito');
+                this.modalSS.$modal.emit(false);
                 this.toastr.success('carpeta creada con exito', 'Carpeta Creada')
+                
               });
             } else {
-              //alert('Error al subir la carpeta');
+              console.log('Error al subir la carpeta');
             }
           }).catch((error) => {
             console.log(error);

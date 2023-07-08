@@ -1,20 +1,37 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Todas las imagenes</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Carpeta 1</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Carpeta 2</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">mas</button>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"><app-images></app-images></div>
-    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Todas las imágenes</button>
+  </li>  
+  <li *ngFor="let carpeta of carpetas" class="nav-item" role="presentation">
+    <button class="nav-link" [attr.id]="carpeta.folderId + '-tab'" data-bs-toggle="tab" [attr.data-bs-target]="'#' + carpeta.folderId + '-tab-pane'" type="button" role="tab" [attr.aria-controls]="carpeta.folderId + '-tab-pane'" [attr.aria-selected]="false">
+      {{ carpeta.nombre }}
+    </button>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <app-images></app-images>
   </div>
+  
+  <div class="tab-pane fade" *ngFor="let carpeta of carpetas" [attr.id]="carpeta.folderId + '-tab-pane'" role="tabpanel" [attr.aria-labelledby]="carpeta.folderId + '-tab'" tabindex="0">
+    <nav class="navbar navbar-light"  style=" margin: 15px;  background-color: #E4E4E4;">
+        <div class="container-fluid">
+          <a class="navbar-brand"> <h3> <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i> {{ carpeta.nombre }}</h3></a>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            
+          </form>
+        </div>
+      </nav>
+
+    
+    <div class="grid-container">
+      
+
+      <img *ngFor="let imagen of carpeta.imagenes" [attr.src]="imagen.URL" alt="" class="grid-item">
+    </div>
+
+  </div>
+</div>

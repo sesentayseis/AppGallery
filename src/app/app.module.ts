@@ -23,6 +23,8 @@ import { TabsComponent } from './components/a-sub-components/tabs/tabs.component
 import { ModalComponent }  from './components/a-sub-components/modal/modal.component';
 import { SubirImagenComponent } from './components/a-sub-components/subir-imagen/subir-imagen.component';
 
+import { HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,8 +48,11 @@ import { SubirImagenComponent } from './components/a-sub-components/subir-imagen
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+   
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
