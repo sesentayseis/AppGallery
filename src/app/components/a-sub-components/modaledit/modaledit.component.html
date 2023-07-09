@@ -1,0 +1,25 @@
+<div class="modal">
+    <div class="card">
+      <div class="card-header">
+        <h3>Crear carpeta</h3>
+        <button (click)="closeModal()">X</button>
+      </div>
+      <div class="card-body">
+        <app-spinner *ngIf="loading"></app-spinner>
+        <form (ngSubmit)="updateFolder(crearFolder.value)" [formGroup]="crearFolder">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Cambiar nombre de la Carpeta:</label>
+            <input type="text" class="form-control" formControlName="nameFolder" />
+            <span
+              *ngIf="crearFolder.get('nameFolder')?.hasError('required') && crearFolder.get('nameFolder')?.touched"
+              class="text-danger errorLabel"
+            >
+              El <strong>nombre de la carpeta</strong> no puede estar vacío.
+            </span>
+          </div>
+          <button type="submit" [disabled]="crearFolder.invalid" class="btn btn-primary">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

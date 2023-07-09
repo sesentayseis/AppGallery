@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
 import { Router } from '@angular/router';
+import { SwitchService } from '../services/switch.service';
 
 @Component({
   selector: 'app-tabs',
@@ -15,10 +16,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
+  modalSwitch: boolean = false;
   user: any;
   idUsuario: string | undefined;
   dataUser: any;
   carpetas: any[] = [];
+;
 
   constructor(
     private fb: FormBuilder,
@@ -26,10 +29,14 @@ export class TabsComponent implements OnInit {
     private toastr: ToastrService,
     private db: AngularFireDatabase,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private modalSS: SwitchService,
   ) {}
 
   ngOnInit(): void {
+    this.modalSS.$modal.subscribe((valor) => {this.modalSwitch = valor;});
+    
+
     this.afAuth.user.subscribe(user => {
       
           this.dataUser = user;
@@ -41,9 +48,22 @@ export class TabsComponent implements OnInit {
         this.http.get(apiFolders).subscribe((response: any) => {
           this.carpetas = response;
           console.log(this.carpetas);
+    
         });
      
 
     });
   }
+
+  
+  openModal(){
+    this.modalSwitch = true;
+    console.log('open modal');
+  }
+ 
+
+  
+
+
+
 }

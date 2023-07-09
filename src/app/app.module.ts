@@ -24,6 +24,7 @@ import { ModalComponent }  from './components/a-sub-components/modal/modal.compo
 import { SubirImagenComponent } from './components/a-sub-components/subir-imagen/subir-imagen.component';
 
 import { HttpClientModule} from '@angular/common/http';
+import { ModaleditComponent } from './components/a-sub-components/modaledit/modaledit.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HttpClientModule} from '@angular/common/http';
     ImagesComponent,
     TabsComponent,
     ModalComponent,
-    SubirImagenComponent
+    SubirImagenComponent,
+    ModaleditComponent
     
   ],
   imports: [

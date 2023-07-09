@@ -1,33 +1,28 @@
 <app-header></app-header>
 <div class="div-body">
-  <form (ngSubmit)="guardar()" [formGroup]="guardarImagen" >
+  <form (ngSubmit)="guardar()" [formGroup]="guardarImagen" class="upload-form">
     <h1>Subir imagen...</h1>
     <div class="form-group">
       <label for="title">Nombre <span>Ingresa el Nombre de la Imagen</span></label>
-      <input type="text"   formControlName="imagename"  class="form-controll" />
+      <input type="text" formControlName="imagename" class="form-control" />
     </div>
     <div class="form-group">
-
       <label for="title">Carpeta: <span>Seleciona una carpeta </span></label>
       <select class="form-select" formControlName="carpetaid" aria-label="Default select example">
         <option >---- Selecciona una Carpeta ----</option>
         <option *ngFor="let carpeta of carpetas" [value]="carpeta.folderId">{{ carpeta.nombre }}</option>
       </select>
     </div>
-
     <div class="form-group file-area">
       <label for="images">Imagen. <span>Tus imágenes deben tener al menos 400x300 de ancho</span></label>
       <input type="file" formControlName="imagemultimedia" id="imagemultimedia" required="required" multiple="multiple" #imagesInput />
       <div class="file-dummy">
-        <div class="success">Great, your files are selected. Keep on.</div>
-        <div class="default">Please select some files</div>
+        <div class="success">Su imagen esta adjuntadaa</div>
+        <div class="default">Arrastre o adjunte su imagen</div>
       </div>
     </div>
-
     <div class="form-group">
       <button type="submit">Subir Imagen</button>
     </div>
-
   </form>
-
 </div>

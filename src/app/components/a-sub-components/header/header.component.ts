@@ -10,12 +10,14 @@ import { SwitchService } from '../services/switch.service';
 })
 export class HeaderComponent implements OnInit {
   dataUser: any;
-  modalSwitch: boolean = false; ;
+  modalSwitch: boolean = false;
+
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private modalSS: SwitchService) { }
+    private modalSS: SwitchService,
+    ) { }
 
     ngOnInit(): void {
       this.modalSS.$modal.subscribe((valor) => {this.modalSwitch = valor;});
@@ -26,9 +28,12 @@ export class HeaderComponent implements OnInit {
     }
 
     // Logica del modal
-
     openModal(){
       this.modalSwitch = true;
       console.log('open modal');
+    }
+
+    openSubirI(){
+      this.router.navigate(['/subir-imagen']);
     }
 }

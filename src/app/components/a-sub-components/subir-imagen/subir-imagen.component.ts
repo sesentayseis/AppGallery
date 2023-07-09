@@ -42,7 +42,7 @@ export class SubirImagenComponent implements OnInit {
     this.afAuth.user.subscribe(user => {
       
       
-
+      //Desde la linea 47 hasta 54
       if (user && user.emailVerified) {
           this.dataUser = user;
           this.idUsuario = user?.uid;
@@ -61,13 +61,13 @@ export class SubirImagenComponent implements OnInit {
   }
 
   async guardar() {
-    
+    //valores del formulario subir-imagen
     const imagename = this.guardarImagen.value.imagename;
     const carpetaid = this.guardarImagen.value.carpetaid;
     const imageFile = this.imagesInput.nativeElement?.files?.[0];
 
 
-
+    // value api
     const api = `https://xw2v9yt588.execute-api.us-east-1.amazonaws.com/users/${this.idUsuario}/folders/${carpetaid}/images`;
 
     console.log(api);
@@ -87,7 +87,7 @@ export class SubirImagenComponent implements OnInit {
       const downloadURL = await snapshot.ref.getDownloadURL();
 
       console.log("imageId: " + newIdImage + "\nnombre: " + imagename + "\nURL:" + downloadURL);
-
+      //solo variable nombre-carpetas
       const imagenData = {
         imageId: newIdImage,
         nombre: imagename,

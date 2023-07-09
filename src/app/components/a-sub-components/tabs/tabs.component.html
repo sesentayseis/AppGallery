@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Todas las imágenes</button>
+    <button class="nav-link active custom-nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Todas las imágenes</button>
   </li>  
   <li *ngFor="let carpeta of carpetas" class="nav-item" role="presentation">
-    <button class="nav-link" [attr.id]="carpeta.folderId + '-tab'" data-bs-toggle="tab" [attr.data-bs-target]="'#' + carpeta.folderId + '-tab-pane'" type="button" role="tab" [attr.aria-controls]="carpeta.folderId + '-tab-pane'" [attr.aria-selected]="false">
+    <button class="nav-link custom-nav-link" [attr.id]="carpeta.folderId + '-tab'" data-bs-toggle="tab" [attr.data-bs-target]="'#' + carpeta.folderId + '-tab-pane'" type="button" role="tab" [attr.aria-controls]="carpeta.folderId + '-tab-pane'" [attr.aria-selected]="false">
       {{ carpeta.nombre }}
     </button>
   </li>
@@ -11,13 +11,20 @@
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-    <app-images></app-images>
+    <div class="grid-container">
+      <ng-container *ngFor="let carpeta of carpetas">
+        <ng-container *ngFor="let imagen of carpeta.imagenes">
+          <img [attr.src]="imagen.URL" alt="" class="grid-item">
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
   
   <div class="tab-pane fade" *ngFor="let carpeta of carpetas" [attr.id]="carpeta.folderId + '-tab-pane'" role="tabpanel" [attr.aria-labelledby]="carpeta.folderId + '-tab'" tabindex="0">
+
     <nav class="navbar navbar-light"  style=" margin: 15px;  background-color: #E4E4E4;">
         <div class="container-fluid">
-          <a class="navbar-brand"> <h3> <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i> {{ carpeta.nombre }}</h3></a>
+          <button class="navbar-brand" (click)="openModal()"> <h3> <i class="fa-solid fa-pen-to-square" style="color: #000000;" ></i> {{ carpeta.nombre }}</h3></button>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -29,9 +36,13 @@
     
     <div class="grid-container">
       
-
-      <img *ngFor="let imagen of carpeta.imagenes" [attr.src]="imagen.URL" alt="" class="grid-item">
+      <img *ngFor="let imagen of carpeta.imagenes" [attr.src]="imagen.URL" alt="" class="grid-item" >
     </div>
 
   </div>
+  <div *ngIf="modalSwitch == true">
+    <app-modaledit></app-modaledit>
+  </div>
+  
 </div>
+

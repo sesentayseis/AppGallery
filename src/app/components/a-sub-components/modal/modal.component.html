@@ -5,7 +5,7 @@
           <h3>Crear carpeta</h3> <button (click)="closeModal()">X</button>
         </div>
         <div class="card-body">
-
+          <app-spinner *ngIf="loading"></app-spinner>
             <form (ngSubmit)="createFolder()" [formGroup]="crearFolder">
                 <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nombre de la Carpeta:</label>
@@ -13,11 +13,11 @@
                 <span *ngIf="crearFolder.get('nameFolder')?.hasError('required') && crearFolder.get('nameFolder')?.touched" class="text-danger errorLabel">
                   El <strong>nombre de la carpeta</strong> no puede estar vacia.
                 </span>
-                </div>
+                </div>  
                 <button type="submit" [disabled]="crearFolder.invalid" class="btn btn-primary" >Crear</button>
             </form>
             
         </div>
       </div>
-
+      
 </div>

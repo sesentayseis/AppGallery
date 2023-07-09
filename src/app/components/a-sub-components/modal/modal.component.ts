@@ -4,7 +4,9 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { v4 as uuidv4 } from 'uuid';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-modal',
@@ -14,11 +16,14 @@ import { ToastrService } from 'ngx-toastr';
 export class ModalComponent implements OnInit {
   crearFolder: FormGroup;
   dataUser: any;
+  loading: boolean = false;
+  showSpinner: boolean = false;
   constructor(
     private modalSS: SwitchService,
     private fb: FormBuilder,
     private db: AngularFireDatabase,
     private afAuth: AngularFireAuth,
+    private router: Router,
     private toastr: ToastrService,
     ){
 
@@ -29,12 +34,11 @@ export class ModalComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    
-    
   }
 
   
   async createFolder() {
+    
     const folderName = this.crearFolder.value.nameFolder;
     // nombre del al carpeta console.log(folderName);
   
@@ -52,6 +56,7 @@ export class ModalComponent implements OnInit {
           imagenes: [],
         };
 
+        this.showSpinner = true;
         //console.log(folderData);
         
         try {
@@ -67,12 +72,17 @@ export class ModalComponent implements OnInit {
           response.then((res) => {
             if (res.ok) {
               res.json().then((result) => {
+                
                 //console.log(result);
                 console.log('carpeta creada con exito');
                 //alert('carpeta creada con exito');
                 this.modalSS.$modal.emit(false);
                 this.toastr.success('carpeta creada con exito', 'Carpeta Creada')
-                
+                this.router
+                    .navigateByUrl('/', { skipLocationChange: true })
+                    .then(() => {
+                      this.router.navigate(['/dashboard']);
+                    });
               });
             } else {
               console.log('Error al subir la carpeta');
@@ -83,12 +93,14 @@ export class ModalComponent implements OnInit {
           });
           
         } catch (error) {
+          
           console.log(error);
           //alert('Error al enviar los datos a la API');
         }
-
+        this.showSpinner = false;
       });
     });
+    
   }
   
   //logica del modal
