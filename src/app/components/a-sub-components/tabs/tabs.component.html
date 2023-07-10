@@ -24,7 +24,7 @@
 
     <nav class="navbar navbar-light"  style=" margin: 15px;  background-color: #E4E4E4;">
         <div class="container-fluid">
-          <button class="navbar-brand" (click)="openModal()"> <h3> <i class="fa-solid fa-pen-to-square" style="color: #000000;" ></i> {{ carpeta.nombre }}</h3></button>
+          <button class="navbar-brand" (click)="openModal(carpeta.folderId)"> <h3> <i class="fa-solid fa-pen-to-square" style="color: #000000;" ></i> {{ carpeta.nombre }}</h3></button>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -39,7 +39,7 @@
       <img *ngFor="let imagen of carpeta.imagenes" [attr.src]="imagen.URL" alt="" class="grid-item" >
     </div>
 
-  </div>
+  </div>  
   <div *ngIf="modalSwitch == true">
     <app-modaledit></app-modaledit>
   </div>

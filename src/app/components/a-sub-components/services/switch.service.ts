@@ -8,4 +8,5 @@ export class SwitchService {
   constructor() { }
 
   $modal = new EventEmitter<any>();
+  $data = new EventEmitter<string>();
 }

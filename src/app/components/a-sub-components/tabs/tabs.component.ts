@@ -21,6 +21,7 @@ export class TabsComponent implements OnInit {
   idUsuario: string | undefined;
   dataUser: any;
   carpetas: any[] = [];
+  folderId: any;
 ;
 
   constructor(
@@ -56,9 +57,10 @@ export class TabsComponent implements OnInit {
   }
 
   
-  openModal(){
+  openModal(idFolder:any){
+    this.modalSS.$data.emit(idFolder);
     this.modalSwitch = true;
-    console.log('open modal');
+    console.log(idFolder);
   }
  
 
