@@ -1,9 +1,12 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active custom-nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Todas las imágenes</button>
-  </li>  
+    <button class="nav-link active custom-nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+      type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Todas las imágenes</button>
+  </li>
   <li *ngFor="let carpeta of carpetas" class="nav-item" role="presentation">
-    <button class="nav-link custom-nav-link" [attr.id]="carpeta.folderId + '-tab'" data-bs-toggle="tab" [attr.data-bs-target]="'#' + carpeta.folderId + '-tab-pane'" type="button" role="tab" [attr.aria-controls]="carpeta.folderId + '-tab-pane'" [attr.aria-selected]="false">
+    <button class="nav-link custom-nav-link" [attr.id]="carpeta.folderId + '-tab'" data-bs-toggle="tab"
+      [attr.data-bs-target]="'#' + carpeta.folderId + '-tab-pane'" type="button" role="tab"
+      [attr.aria-controls]="carpeta.folderId + '-tab-pane'" [attr.aria-selected]="false">
       {{ carpeta.nombre }}
     </button>
   </li>
@@ -19,30 +22,64 @@
       </ng-container>
     </div>
   </div>
-  
-  <div class="tab-pane fade" *ngFor="let carpeta of carpetas" [attr.id]="carpeta.folderId + '-tab-pane'" role="tabpanel" [attr.aria-labelledby]="carpeta.folderId + '-tab'" tabindex="0">
 
-    <nav class="navbar navbar-light"  style=" margin: 15px;  background-color: #E4E4E4;">
-        <div class="container-fluid">
-          <button class="navbar-brand" (click)="openModal(carpeta.folderId)"> <h3> <i class="fa-solid fa-pen-to-square" style="color: #000000;" ></i> {{ carpeta.nombre }}</h3></button>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+  <div class="tab-pane fade" *ngFor="let carpeta of carpetas" [attr.id]="carpeta.folderId + '-tab-pane'" role="tabpanel"
+    [attr.aria-labelledby]="carpeta.folderId + '-tab'" tabindex="0">
+
+    <div class="" style=" margin: 15px; ">
+      <div class="container-fluid" >
+        <div (click)="editarnombre()">
+          <h3>
             
-          </form>
+            {{ carpeta.nombre }}
+          </h3>
         </div>
-      </nav>
 
-    
-    <div class="grid-container">
-      
-      <img *ngFor="let imagen of carpeta.imagenes" [attr.src]="imagen.URL" alt="" class="grid-item" >
+      </div>
+      <!-- 
+      <div class="container-fluid" *ngIf="!editMode">
+<form [formGroup]="guardarcambio" (ngSubmit)="guardarCambios()">
+        <div class="row">
+          
+            <div class="col-12 col-md-8">
+              <input #folderIdInput class="form-control me-2" [attr.id]="carpeta.folderId" formControlName="foldername" style="width: 150px;" type="text" [attr.placeholder]="carpeta.nombre"  >
+              
+            </div>
+            
+            <div class="col-6 col-md-4">
+
+              <div class="row align-items-center justify-content-center">
+                <button class="col-sm hover-div" (click)="cambiarnombre()" type="submit">
+                  <i class="fa-solid fa-check" style="color: #ffffff;"></i>
+                  
+                </button>
+
+                <button class="col-sm hover-div2" (click)="eliminarcarpeta()" type="submit">
+                  <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                </button>
+                
+                <button class="col-sm hover-div3" (click)="cerrareditarnombre()">
+                  <i class="fa-solid fa-x" style="color: #ffffff;"></i>
+                </button>
+              </div>
+            </div>          
+        </div>
+</form>
+      </div>
+-->
     </div>
 
-  </div>  
+    <hr>
+
+    <div class="grid-container">
+
+      <img *ngFor="let imagen of carpeta.imagenes" [attr.src]="imagen.URL" alt="" class="grid-item">
+    </div>
+
+  </div>
+
   <div *ngIf="modalSwitch == true">
     <app-modaledit></app-modaledit>
   </div>
-  
-</div>
 
+</div>

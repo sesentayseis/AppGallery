@@ -16,13 +16,17 @@ import { SwitchService } from '../services/switch.service';
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
+  @ViewChild('folderIdInput', { static: false }) folderIdInput!: ElementRef<HTMLInputElement>;
   modalSwitch: boolean = false;
   user: any;
   idUsuario: string | undefined;
   dataUser: any;
   carpetas: any[] = [];
   folderId: any;
-;
+  editMode = true;
+  isHovered: boolean = false;
+  guardarcambio: FormGroup;
+; 
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +36,12 @@ export class TabsComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private modalSS: SwitchService,
-  ) {}
+  ) {
+    this.guardarcambio = this.fb.group({
+      foldername: [''],
+      folderid: ['']
+    });
+  }
 
   ngOnInit(): void {
     this.modalSS.$modal.subscribe((valor) => {this.modalSwitch = valor;});
@@ -56,16 +65,38 @@ export class TabsComponent implements OnInit {
     });
   }
 
+
   
-  openModal(idFolder:any){
-    this.modalSS.$data.emit(idFolder);
-    this.modalSwitch = true;
-    console.log(idFolder);
+  editarnombre(){
+    this.editMode = false;
   }
- 
+
+  cerrareditarnombre(){
+    this.editMode = true;
+  }
 
   
+  cambiarnombre(){
 
+    
+
+        console.log("cambiar nombre ")
+  };
+  eliminarcarpeta(){
+    
+   
+      console.log("se elimino la carpeta  ")
+  }
+  
+  guardarCambios(){
+    const foldername = this.guardarcambio.value.foldername;
+      const folderId = this.folderIdInput.nativeElement.getAttribute('id');
+
+  // Aquí puedes realizar las acciones necesarias con los valores del formulario
+
+  console.log('Nombre de carpeta:', foldername);
+  console.log('ID de carpeta:', folderId);
+  }
 
 
 }
