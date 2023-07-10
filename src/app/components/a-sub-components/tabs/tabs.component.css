@@ -29,3 +29,38 @@
 .custom-nav-link {
   font-weight: bolder;
 }
+
+.hover-div {
+  background-color: #7eec5f;
+  text-align: center;
+  padding: 7px;
+  transition: background-color 0.3s ease; /* Agrega una transición suave */
+}
+
+.hover-div:hover {
+  background-color: #00ff00; /* Cambia el color a tu preferencia */
+}
+.hover-div2 {
+  background-color: #e51515;
+  text-align: center;
+  padding: 7px;
+  transition: background-color 0.3s ease; /* Agrega una transición suave */
+}
+
+.hover-div2:hover {
+  background-color: #ff0000; /* Cambia el color a tu preferencia */
+}
+.hover-div3 {
+  background-color: #000000;
+  text-align: center;
+  padding: 7px;
+  transition: background-color 0.3s ease; /* Agrega una transición suave */
+}
+
+.hover-div3:hover {
+  background-color: #757575; /* Cambia el color a tu preferencia */
+}
+
+.hidden-input {
+  display: none;
+}
